@@ -73,6 +73,7 @@ export async function POST(request: Request) {
         {
           success: false,
           message: emailResponse.message,
+          verifyCode
         },
         { status: 500 }
       );

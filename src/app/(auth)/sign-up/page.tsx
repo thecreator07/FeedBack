@@ -1,13 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-// import {useDebounceValue} from "@hookform/resolvers"
 import { useDebounceCallback } from "usehooks-ts";
+// import {useDebounceValue} from "@hookform/resolvers"
 import * as z from "zod";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { signUpSchema } from "@/schemas/signUpSchema";
@@ -76,7 +76,7 @@ const page = () => {
       setIsSubmitting(false);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast({
         title: "Signup failed",
         description: errorMessage,
