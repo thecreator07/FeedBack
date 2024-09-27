@@ -23,10 +23,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 const page = () => {
-  const [username, setUsername] = useState("");
-  const [usernameMessage, setUsernameMessage] = useState("");
-  const [isCheckingUsername, setIscheckingUsername] = useState(false);
-  const [IsSubmitting, setIsSubmitting] = useState(false);
+  const [username, setUsername] = useState<string>("");
+  const [usernameMessage, setUsernameMessage] = useState<string>("");
+  const [isCheckingUsername, setIscheckingUsername] = useState<boolean>(false);
+  const [IsSubmitting, setIsSubmitting] = useState<boolean>(false);
   const debouncedUsername = useDebounceCallback(setUsername, 500);
   const router = useRouter();
   const { toast } = useToast();
