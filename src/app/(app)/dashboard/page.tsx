@@ -15,6 +15,7 @@ import { ApiResponse } from "@/types/ApiResponce";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { MessageCard } from "@/components/MessageCard";
+import NavBar from "@/components/NavBar";
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -134,6 +135,8 @@ function UserDashboard() {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
 
@@ -145,7 +148,7 @@ function UserDashboard() {
             value={profileUrl}
             disabled
             className="input input-bordered w-full p-2 mr-2"
-          />
+            />
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>
@@ -156,7 +159,7 @@ function UserDashboard() {
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
-        />
+          />
         <span className="ml-2">
           Accept Messages: {acceptMessages ? "On" : "Off"}
         </span>
@@ -170,7 +173,7 @@ function UserDashboard() {
           e.preventDefault();
           fetchMessages(true);
         }}
-      >
+        >
         {isLoading ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
@@ -181,16 +184,17 @@ function UserDashboard() {
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <MessageCard
-              key={index}
+            key={index}
               message={message}
               onMessageDelete={handleDeleteMessage}
-            />
-          ))
-        ) : (
-          <p>No messages to display.</p>
-        )}
+              />
+            ))
+          ) : (
+            <p>No messages to display.</p>
+          )}
       </div>
     </div>
+          </>
   );
 }
 
