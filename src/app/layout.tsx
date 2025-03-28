@@ -1,29 +1,50 @@
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/context/AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
+import Head from "next/head";
+import { Metadata } from "next/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "True Feedback",
-  description: "Real feedback from real people.",
+  title:{
+    default:"feedback",
+    template: "%s",
+  },
+  description: "An anonymous feedback/suggestion giving platform ",
+  icons:{
+    icon:[
+      '/public/favicon.ico?v=1',
+    ],
+    apple:[
+      '/public/apple-touch-icon.png?v=4',
+    ],
+    shortcut:[
+      '/public/apple-touch-icon.png?v=4', // for iOS <  12.3; safari on iOS should get this if they
+    ],
+  },
+  manifest:'/public/site.webmanifest'
 };
 
-interface RootLayoutProps {
+export default function RootLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-}
-
-export default async function RootLayout({ children }: RootLayoutProps) {
+}>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={inter.className}>
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any"/>
+      </Head>
+      <body className={inter.className}>
+        <AuthProvider>
+          {/* <NavBar/> */}
           {children}
-          <Toaster />
-        </body>
-      </AuthProvider>
+          <Toaster/>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

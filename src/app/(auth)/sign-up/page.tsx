@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDebounceCallback } from "usehooks-ts";
-// import {useDebounceValue} from "@hookform/resolvers"
 import * as z from "zod";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
@@ -22,7 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-const page = () => {
+const Page = () => {
   const [username, setUsername] = useState<string>("");
   const [usernameMessage, setUsernameMessage] = useState<string>("");
   const [isCheckingUsername, setIscheckingUsername] = useState<boolean>(false);
@@ -177,4 +176,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

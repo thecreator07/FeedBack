@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ApiResponse } from "@/types/ApiResponce";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import MessageCard from "@/components/MessageCard";
+import { MessageCard } from "@/components/MessageCard";
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);

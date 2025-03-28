@@ -5,9 +5,9 @@ import UserModel from "@/model/User";
 import { User } from "next-auth"
 
 
-export async function DELETE( { params }: { params: { messageid: string } }) {
+export async function DELETE( { params }: { params: { messageId: string } }) {
+    const messageId = params.messageId
     await dbConnect()
-    const messageId = params.messageid
     const session = await getServerSession(authOptions)
     const user: User = session?.user
     if (!session || !session.user) {
@@ -41,7 +41,7 @@ export async function DELETE( { params }: { params: { messageid: string } }) {
         );
 
     } catch (error) {
-        console.log("Error dut=ring Deleting",error)
+        console.log("Error during Deleting",error)
         return Response.json(
             {
                 success: false,

@@ -28,7 +28,6 @@ export interface User extends Document {
   messages: Message[];
 }
 
-// Updated User schema
 const UserSchema: Schema<User> = new mongoose.Schema({
   username: {
     type: String,
