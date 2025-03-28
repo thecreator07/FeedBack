@@ -1,5 +1,5 @@
 "use client";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import ChangeUsernameForm from "../ChangeUsernameForm";
 import { Separator } from "@/components/ui/separator";
 import { Undo2 } from "lucide-react";
@@ -20,8 +20,8 @@ function EditProfile() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const { data: session, status } = useSession()
-  const user: User = session?.user as User
+  const { data: session, status } = useSession();
+  const user: User = session?.user as User;
 
   const [toggleDelete, setToggleDelete] = useState<boolean>(true);
   // console.log(toggleDelete);
@@ -35,10 +35,16 @@ function EditProfile() {
         });
         signOut();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      let errorMessage = "Error getting response from googleAI";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      console.error(error);
       toast({
         title: "Error",
-        description: error.response?.data.message ?? "Failed to delete User",
+        description: errorMessage ?? "Failed to delete User",
         variant: "destructive",
       });
     }
@@ -57,14 +63,14 @@ function EditProfile() {
       </div>
     );
   }
-  if (status === "unauthenticated"){
+  if (status === "unauthenticated") {
     router.replace(`/sign-in`);
     return (
       <div className="container">
         <SkeletonProfileLoader />
       </div>
     );
-  } else if (status === "authenticated" && user?.username !== username){
+  } else if (status === "authenticated" && user?.username !== username) {
     router.replace(`/edit-profile/${user.username}`);
     return (
       <div className="container">
@@ -87,15 +93,22 @@ function EditProfile() {
           </Link>
         </div>
         <Separator />
-        <ChangeUsernameForm email={user?.email||""}/>
+        <ChangeUsernameForm email={user?.email || ""} />
         <Separator />
         <ChangePasswordForm />
         <Separator />
         <div className="bg-white rounded-lg p-4">
           <h1 className="text-xl font-semibold mb-4">Delete Profile </h1>
           <div className="flex items-center gap-2 mb-4">
-            <Input type="checkbox" className="h-4 w-4 hover:cursor-pointer" onClick={deleteToggle} />
-            <p>If you want to <strong>Delete</strong> your account then mark the checkbox.</p>
+            <Input
+              type="checkbox"
+              className="h-4 w-4 hover:cursor-pointer"
+              onClick={deleteToggle}
+            />
+            <p>
+              If you want to <strong>Delete</strong> your account then mark the
+              checkbox.
+            </p>
           </div>
           <div className="flex justify-end">
             <DeleteUser

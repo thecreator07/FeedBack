@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document} from 'mongoose';
 
 export interface Message extends Document {
   content: string;
@@ -18,11 +18,12 @@ const MessageSchema: Schema<Message> = new mongoose.Schema({
 });
 
 export interface User extends Document {
+  _id: string
   username: string;
   email: string;
   password: string;
   verifyCode: string;
-  verifyCodeExpiry: Date; 
+  verifyCodeExpiry: Date;
   isVerified: boolean;
   isAcceptingMessages: boolean;
   messages: Message[];

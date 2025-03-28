@@ -2,20 +2,24 @@ import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/model/User';
 import { z } from 'zod';
 import { usernameValidation } from '@/schemas/signUpSchema';
+import { NextRequest } from 'next/server';
 
+export const dynamic = 'force-dynamic'; 
 const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   await dbConnect();
 
   try {
-    const { searchParams } = new URL(request.url);
+    const searchParams = request.nextUrl.searchParams; // Use request.next Url.searchParams
     const queryParams = {
       username: searchParams.get('username'),
     };
 
+
+console.log("queryParams",queryParams,searchParams)
     const result = UsernameQuerySchema.safeParse(queryParams);
 
     if (!result.success) {

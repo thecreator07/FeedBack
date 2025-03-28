@@ -15,13 +15,19 @@ export async function POST() {
 
 
     return new StreamingTextResponse(stream);
-  } catch (error:any) {
-    console.log(error)
+  } catch (error:unknown) {
+    let errorMessage = "Error getting response from googleAI";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    console.error(error); // Using console.error for errors
+
     return NextResponse.json(
       {
         success: false,
-        message: error?.message || "Error getting response from googleAI",
-        error,
+        message: errorMessage, // Using the more specific error message
+        error: error instanceof Error ? error : undefined, // Include error only if it's an Error instance
       },
       { status: 500 }
     );
