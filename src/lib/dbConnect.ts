@@ -15,10 +15,10 @@ async function dbConnect(): Promise<void> {
 
   try {
     // Attempt to connect to the database
-    const db = await mongoose.connect(process.env.DB_URL || '', {dbName:"feedback"});
+    const db = await mongoose.connect(process.env.DB_URL || '', { dbName: "feedback" });
 
-    connection.isConnected = db.connections[0].readyState;
-
+    connection.isConnected = db.connection.readyState;
+    // connection.isConnected = db.connections[0].readyState
     console.log('Database connected successfully');
   } catch (error) {
     console.error('Database connection failed:', error);
