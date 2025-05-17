@@ -28,7 +28,7 @@ export async function GET() {
 
     if (!user || user.length === 0) {
       return Response.json(
-        { message: 'User not found', success: false },
+        { message: 'Feedback Message not found', success: false },
         { status: 404 }
       );
     }
